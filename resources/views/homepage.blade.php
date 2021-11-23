@@ -19,7 +19,6 @@
                         <div class="amount">0</div>
                         <div class="info">Berita Acara</div>
                         <div class="title">
-                            <a href="#">Lihat Detail</a>
                         </div>
                     </div>
                 </div>
@@ -28,7 +27,6 @@
                         <div class="amount">{{ $masuk }}</div>
                         <div class="info">Barang Masuk</div>
                         <div class="title">
-                            <a href="#">Lihat Detail</a>
                         </div>
                     </div>
                 </div>
@@ -37,7 +35,6 @@
                         <div class="amount">{{ $keluar }}</div>
                         <div class="info">Barang Keluar</div>
                         <div class="title">
-                            <a href="#">Lihat Detail</a>
                         </div>
                     </div>
                 </div>
@@ -46,7 +43,6 @@
                         <div class="amount">{{ $sercom }}</div>
                         <div class="info">Jumlah Sercom</div>
                         <div class="title">
-                            <a href="#">Lihat Detail</a>
                         </div>
                     </div>
                 </div>

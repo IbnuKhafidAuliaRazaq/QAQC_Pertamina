@@ -39,16 +39,6 @@
                             <div class="dropdown-inner">
                                 <ul class="link-list">
                                     <li>
-                                        <a href="/profile">
-                                            <em class="icon ni ni-user-alt"></em>
-                                            <span>Lihat Profil</span>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div class="dropdown-inner">
-                                <ul class="link-list">
-                                    <li>
                                         <a href="javascript:void" onclick="document.getElementById('logout-form').submit();">
                                             <em class="icon ni ni-signout"></em>
                                             <span>Keluar</span>
