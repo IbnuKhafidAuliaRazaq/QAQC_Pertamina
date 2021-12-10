@@ -1,60 +1,45 @@
-<div class="nk-header is-light">
+<nav class="navbar navbar-top navbar-expand navbar-dark bg-primary border-bottom">
     <div class="container-fluid">
-        <div class="nk-header-wrap">
-            <div class="nk-menu-trigger d-xl-none ml-n1">
-                <a href="#" class="nk-nav-toggle nk-quick-nav-icon" data-target="sidebarMenu"><em
-                        class="icon ni ni-menu"></em></a>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <!-- Navbar links -->
+        <ul class="navbar-nav align-items-center  ml-md-auto ">
+          <li class="nav-item d-xl-none">
+            <!-- Sidenav toggler -->
+            <div class="pr-3 sidenav-toggler sidenav-toggler-dark" data-action="sidenav-pin"
+              data-target="#sidenav-main">
+              <div class="sidenav-toggler-inner">
+                <i class="sidenav-toggler-line"></i>
+                <i class="sidenav-toggler-line"></i>
+                <i class="sidenav-toggler-line"></i>
+              </div>
             </div>
-            <div class="nk-header-brand d-xl-none">
-                <a href="html/index.html"
-                    class="logo-link nk-sidebar-logo text-light text-uppercase font-weight-bold"
-                    style="font-size: 24px;">
-                    Pertamina
+          </li>
+        </ul>
+        <ul class="navbar-nav align-items-center  ml-auto ml-md-0 ">
+          <li class="nav-item dropdown">
+            <a class="nav-link pr-0" href="#" role="button" data-toggle="dropdown" aria-haspopup="true"
+              aria-expanded="false">
+                <div class="media align-items-center">
+                    <div class="media-body  ml-2  d-none d-lg-block">
+                        <span class="mb-0 text-sm  font-weight-bold">{{ Auth::user()->fullname }}</span>
+                    </div>
+                </div>
+            </a>
+            <div class="dropdown-menu  dropdown-menu-right ">
+                <div class="dropdown-header noti-title">
+                    <h6 class="text-overflow m-0">Selamat Datang</h6>
+                </div>
+                <div class="dropdown-divider"></div>
+                <a class="col-4 shortcut-item" href="javascript:void" onclick="document.getElementById('logout-form').submit();">
+                    <i class="ni ni-user-run"></i>
+                    <span>Keluar</span>
                 </a>
-            </div><!-- .nk-header-brand -->
-            <div class="nk-header-tools">
-                <ul class="nk-quick-nav">
-                    <li class="dropdown user-dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                            <div class="user-toggle">
-                                <div class="user-avatar sm">
-                                    <em class="icon ni ni-user-alt"></em>
-                                </div>
-                                <div class="user-info d-none d-md-block">
-                                    <div class="user-status">{{ Auth::user()->position }}</div>
-                                    <div class="user-name dropdown-indicator">{{ Auth::user()->fullname }}</div>
-                                </div>
-                            </div>
-                        </a>
-                        <div
-                            class="dropdown-menu dropdown-menu-md dropdown-menu-right dropdown-menu-s1">
-                            <div class="dropdown-inner user-card-wrap bg-lighter d-none d-md-block">
-                                <div class="user-card">
-                                    <div class="user-info">
-                                        <span class="lead-text">{{ Auth::user()->fullname }}</span>
-                                        <span class="sub-text">{{ Auth::user()->email }}</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="dropdown-inner">
-                                <ul class="link-list">
-                                    <li>
-                                        <a href="javascript:void" onclick="document.getElementById('logout-form').submit();">
-                                            <em class="icon ni ni-signout"></em>
-                                            <span>Keluar</span>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </li><!-- .dropdown -->
-                    
-                </ul>
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                    @csrf
+                </form>
             </div>
-        </div>
+          </li>
+        </ul>
+      </div>
     </div>
-</div>
-
-<form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-    @csrf
-</form>
+</nav>

@@ -39,7 +39,7 @@ class ReportController extends Controller
 
     public function summary(){
         
-        // $data = Report::orderBy('id', 'DESC')->get();
+        $data = Report::orderBy('id', 'DESC')->get();
         $masuk = Report::where('tipe_in_out', 1)->sum('jumlah_input');
         $keluar = Report::where('tipe_in_out', 2)->sum('jumlah_input');
         $distinct = DB::table('tool_report')->select(['qr_code', 'oas_code', 'tipe_tool'])->distinct()->get();
@@ -48,6 +48,7 @@ class ReportController extends Controller
             $product_in = Report::where('qr_code', $dst->qr_code)->where('oas_code', $dst->oas_code)->where('tipe_in_out', 1)->sum('jumlah_input');
             $product_out = Report::where('qr_code', $dst->qr_code)->where('oas_code', $dst->oas_code)->where('tipe_in_out', 2)->sum('jumlah_input');
             $summary = Report::orderBy('created_at', 'desc')->where(['qr_code' => $dst->qr_code, 'oas_code' => $dst->oas_code, 'tipe_tool' => $dst->tipe_tool])->first();
+            // dd($summary->tool->division);
             $distinct[$index]->oas_code = $summary->oas->oas_code;
             $distinct[$index]->sercom_name = $summary->sercom->sercom_name;
             $distinct[$index]->tool_name = $summary->tool->tool_name;
@@ -66,6 +67,7 @@ class ReportController extends Controller
             $index++;
             // dd($summary);
         }
+        // $distinct = useReportSummary::getData();
         // dd($distinct);
         // return response()->json($distinct);
         $title = 'Summary ALL';
