@@ -1,113 +1,125 @@
 @extends('template.app')
 @section('app')
-<div class="nk-block-head nk-block-head-sm">
-    <div class="nk-block-between">
-        <div class="nk-block-head-content">
-            <h3 class="nk-block-title page-title text-uppercase">
-                <em class="icon ni ni-archive"></em>
-                Summary 
-            </h3>
-        </div>
-        <div class="nk-block-head-content">
-            <div class="toggle-wrap nk-block-tools-toggle">
-                <a href="#" class="btn btn-icon btn-trigger toggle-expand mr-n1" data-target="pageMenu"><em class="icon ni ni-more-v"></em></a>
-                <div class="toggle-expand-content" data-content="pageMenu">
-                    <ul class="nk-block-tools g-3">
-                        <li class="nk-block-tools-opt">
-                            <a href="{{ url('summary/pdf') }}" target="_blank" class="btn btn-danger btn-sm">
-                                <em class="icon ni ni-printer"></em><span>Export PDF</span>
-                            </a>
-                        </li>
-                        <li class="nk-block-tools-opt">
-                            <a href="{{ url('summary/excel') }}" class="btn btn-success btn-sm">
-                                <em class="icon ni ni-printer-fill"></em><span>Export Excel</span>
-                            </a>
-                        </li>
-                    </ul>
+<!-- Header -->
+<div class="header bg-primary pb-6">
+    <div class="container-fluid">
+        <div class="header-body">
+            <div class="row align-items-center py-4">
+                <div class="col-lg-6 col-7">
+                    <h6 class="h2 text-white d-inline-block mb-0">Summary All</h6>
                 </div>
+                {{-- <div class="col-lg-6 col-5 text-right">
+                    <a href="#" class="btn btn-sm btn-neutral">New</a>
+                    <a href="#" class="btn btn-sm btn-neutral">Filters</a>
+                </div> --}}
             </div>
-        </div><!-- .nk-block-head-content -->
-    </div>
-</div>
-<div class="card card-preview">
-    <div class="card-inner">
-        <div class="row mb-3">
-            <div class="col-4 col-sm-3">
-                <div class="nk-order-ovwg-data sell">
-                    <div class="amount d-flex align-items-center justify-content-between">
-                        {{$masuk}}
-                        <em class="icon ni ni-download"></em>
+            <!-- Card stats -->
+            <div class="row">
+                <div class="col-xl-3 col-md-6">
+                    <div class="card card-stats">
+                        <!-- Card body -->
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col">
+                                    <h5 class="card-title text-uppercase text-muted mb-0">Barang Masuk</h5>
+                                    <span class="h2 font-weight-bold mb-0">{{ number_format($masuk, 0, ',', '.') }}</span>
+                                </div>
+                                <div class="col-auto">
+                                    <div class="icon icon-shape bg-gradient-red text-white rounded-circle shadow">
+                                        <i class="ni ni-app"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="info">Barang Masuk</div>
                 </div>
-            </div>
-            <div class="col-4 col-sm-3">
-                <div class="nk-order-ovwg-data sell">
-                    <div class="amount  d-flex align-items-center justify-content-between">
-                        {{$keluar}}
-                        <em class="icon ni ni-upload"></em>
+                <div class="col-xl-3 col-md-6">
+                    <div class="card card-stats">
+                        <!-- Card body -->
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col">
+                                    <h5 class="card-title text-uppercase text-muted mb-0">Barang Keluar</h5>
+                                    <span class="h2 font-weight-bold mb-0">{{ number_format($keluar, 0, ',', '.') }}</span>
+                                </div>
+                                <div class="col-auto">
+                                    <div class="icon icon-shape bg-gradient-orange text-white rounded-circle shadow">
+                                        <i class="ni ni-app"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="info">Barang Keluar</div>
                 </div>
             </div>
-            {{-- <div class="col-4 col-sm-3 float-right">
-                <div style="width: 150px" class="btn btn-sm btn-danger m-1"><em class="icon ni ni-printer"></em> Export PDF</div>
-                <div style="width: 150px" class="btn btn-sm btn-success m-1"><em class="icon ni ni-printer-fill"></em> Export Excel</div>
-            </div> --}}
         </div>
-        <table class="table datatable-init" style="font-size: 12px" >
-            <thead >
-                <tr>
-                    <th>Kode OAS</th>
-                    <th>Sercom</th>
-                    <th>Nama Barang</th>
-                    <th>Prouduct In</th>
-                    <th>Product Out</th>
-                    <th>Balance Stock</th>
-                    <th>Minimum Stock</th>
-                    <th>Remarks</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach ($distinct_data as $dst)
-                    <tr>
-                        <td> {{ $dst->oas_code }} </td> 
-                        <td> {{ $dst->sercom_name }} </td>
-                        <td>
-                            {{ $dst->tool_name }}
-                        </td>
-                        <!-- <td> {{ $dst->qr_code }} </td> -->
-                        <td> {{ $dst->product_in }} </td>
-                        <td> {{ $dst->product_out }} </td>
-                        <td> {{ $dst->quantity_code }} </td>
-                        <td> <span class="min_stock badge badge-primary" onclick="minStock({{$dst->min_stock_id}},{{$dst->min_stock}})" data-toggle="modal" data-target="#modalDefault">{{ $dst->min_stock }}</span> </td>
-                        <td> 
-                            @if ($dst->quantity_code <= $dst->min_stock)
-                                <strong class="text-danger" >TOP UP</strong>
-                            @else
-                                <strong class="text-success" >OK</strong>
-                            @endif    
-                        </td>
-                    </tr>
-                @endforeach
-            </tbody>
-        </table>
     </div>
 </div>
 
+<div class="container-fluid mt--6">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header bg-transparent">
+                    <div class="row align-items-center">
+                        <div class="col">
+                            <h5 class="h3 mb-0">Summary</h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table datatable-init" >
+                            <thead >
+                                <tr>
+                                    <th>Kode OAS</th>
+                                    <th>Sercom</th>
+                                    <th>Nama Barang</th>
+                                    <th>Prouduct In</th>
+                                    <th>Product Out</th>
+                                    <th>Balance Stock</th>
+                                    <th>Minimum Stock</th>
+                                    <th>Remarks</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($distinct_data as $dst)
+                                    <tr>
+                                        <td> {{ $dst->oas_code }} </td> 
+                                        <td> {{ $dst->sercom_name }} </td>
+                                        <td>
+                                            {{ $dst->tool_name }}
+                                        </td>
+                                        <!-- <td> {{ $dst->qr_code }} </td> -->
+                                        <td> {{ $dst->product_in }} </td>
+                                        <td> {{ $dst->product_out }} </td>
+                                        <td> {{ $dst->quantity_code }} </td>
+                                        <td> <span class="min_stock badge badge-primary" onclick="minStock({{$dst->min_stock_id}},{{$dst->min_stock}})" data-toggle="modal" data-target="#modalDefault">{{ $dst->min_stock }}</span> </td>
+                                        <td> 
+                                            @if ($dst->quantity_code <= $dst->min_stock)
+                                                <strong class="text-danger" >TOP UP</strong>
+                                            @else
+                                                <strong class="text-success" >OK</strong>
+                                            @endif    
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 <!-- Modal Content Code -->
 <div class="modal fade" tabindex="-1" id="modalDefault">    
-    <div class="modal-dialog modal-dialog-top modal-sm" role="document">        
-        <div class="modal-content">            
-            <a href="#" class="close" data-dismiss="modal" aria-label="Close">                
-                <em class="icon ni ni-cross"></em>           
-            </a>            
-            <div class="modal-header">                
-                <h5 class="modal-title">Ubah Minimal Stock</h5>            
-            </div>       
+    <div class="modal-dialog modal-dialog-top modal-sm" role="document">       
+        <div class="modal-content">
             <form action="{{ url('summary_all/min_stock') }}" method="post">  
-            @csrf 
-            <div class="modal-body modal-body-sm">        
+            @csrf
+            <div class="modal-body modal-body-sm">
+                <h2>Ubah Minimum Stock</h2>      
                 <input type="hidden" name="id" id="idMin">        
                 <input type="number" class="form-control" name="min_stock" id="stock">            
             </div>            
